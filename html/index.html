@@ -20,11 +20,11 @@
 </head>
 <body>
 
-<h1>3-Tier 검색 데모</h1>
-<p>WEB(Nginx) → WAS(Spring Boot) → DB(RDS)</p>
+<h1>SmileShark People</h1>
+<p>Tech 2주차 테스트</p>
 
 <div class="search-box">
-    <input id="query" type="text" placeholder="검색어 입력 (예: 노트북)"
+    <input id="query" type="text" placeholder="이름 입력 (예: 강호성)"
         onkeydown="if(event.key==='Enter') search()">
     <button onclick="search()">검색</button>
 </div>
@@ -37,7 +37,7 @@ async function search() {
     const result = document.getElementById('result');
 
     if (!q) {
-        result.innerHTML = '<p class="empty">검색어를 입력해주세요.</p>';
+        result.innerHTML = '<p class="empty">이름을 입력해주세요.</p>';
         return;
     }
 
