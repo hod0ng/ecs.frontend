@@ -2,10 +2,10 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>SmileShark 검색 데모</title>
+    <title>SmileShark Team 검색</title>
     <style>
         body { font-family: sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; }
-        h1 { margin-bottom: 8px; }
+        h1 { margin-bottom: 8px; color: #3b82f6; }
         p { color: #888; margin-bottom: 24px; font-size: 0.9rem; }
         .search-box { display: flex; gap: 8px; margin-bottom: 20px; }
         input { flex: 1; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 6px; }
@@ -19,45 +19,34 @@
     </style>
 </head>
 <body>
-
 <h1>SmileShark People</h1>
-<p>Tech 2주차 테스트</p>
-
+<p>Tech 2주차 과제</p>
 <div class="search-box">
-    <input id="query" type="text" placeholder="이름 입력 (예: 강호성)"
+    <input id="query" type="text" placeholder="임직원 이름을 검색해주세요."
         onkeydown="if(event.key==='Enter') search()">
     <button onclick="search()">검색</button>
 </div>
-
 <div id="result"></div>
-
 <script>
 async function search() {
     const q = document.getElementById('query').value.trim();
     const result = document.getElementById('result');
-
     if (!q) {
         result.innerHTML = '<p class="empty">이름을 입력해주세요.</p>';
         return;
     }
-
     result.innerHTML = '<p class="empty">검색 중...</p>';
-
     try {
         const res = await fetch('/api/items?q=' + encodeURIComponent(q));
         if (!res.ok) throw new Error('서버 오류 (' + res.status + ')');
-
         const items = await res.json();
-
         if (items.length === 0) {
-            result.innerHTML = '<p class="empty">검색 결과가 없습니다.</p>';
+            result.innerHTML = '<p class="empty">SmileShark 임직원이 아닙니다.</p>';
             return;
         }
-
         result.innerHTML = items.map(item =>
             '<div class="item"><strong>' + item.name + '</strong><span>' + item.description + '</span></div>'
         ).join('');
-
     } catch (e) {
         result.innerHTML = '<p class="error">❌ 오류: ' + e.message + '</p>';
     }
